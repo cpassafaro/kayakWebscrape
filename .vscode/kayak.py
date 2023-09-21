@@ -1,4 +1,5 @@
-import requests 
+import requests
+import re
 from bs4 import BeautifulSoup
 
 boatlist = [] 
@@ -41,8 +42,16 @@ def getBoatsFromColoradoKayak():
         header = pages.find('h1', {'class': 'heading'})
         # only shop all whitewater kayak is set up this way so we don't need more detailed statement
         if header:
-            boats = pages.find('div', {'class': 'product-item'})
-            print(boats)
+            boats = pages.find_all('div', {'class': 'product-item'})
+            for boat in boats:
+                print(boat.find('button', {'class': 'product-item__action-button'}))
+                boatObject = {
+                    'title': boat.find('a', {'class': 'product-item__title'}).text,
+                    'price': re.sub("\D", "", boat.find('span', {'class': 'price'}).text),
+                    'url': url 
+                }
+                # print(boat)
+                print('BREAK!!!')
     return
 
 getBoatsFromColoradoKayak()
