@@ -7,7 +7,7 @@ tester = []
 headers = {'User-Agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'}
 
 
-def getBoats():
+def getBoatsNA():
     # gettign boats for next adventure site
     allBoats = getBoatsFromNextAdventure(4)
     return allBoats
@@ -44,17 +44,52 @@ def getBoatsFromColoradoKayak():
         if header:
             boats = pages.find_all('div', {'class': 'product-item'})
             for boat in boats:
-                print(boat.find('button', {'class': 'product-item__action-button'}))
+                # print(boat)
+                productUrl = url
+                actionButton = boat.find('button', {'class': 'product-item__action-button'})
+                imgElement = boat.find('img', {'class': 'product-item__primary-image'})
+
+                if actionButton.has_attr('data-product-url'): 
+                    productUrl = url + actionButton['data-product-url']
+
                 boatObject = {
                     'title': boat.find('a', {'class': 'product-item__title'}).text,
+                    'link': productUrl,
                     'price': re.sub("\D", "", boat.find('span', {'class': 'price'}).text),
-                    'url': url 
+                    'image': 'https::' + imgElement['data-src']
                 }
-                # print(boat)
-                print('BREAK!!!')
+                boatlist.append(boatObject)
     return
 
-getBoatsFromColoradoKayak()
-# getBoats()
-# print(boatlist)
+def getBoatsFromRutabaga():
+    url = 'https://www.rutabagashop.com/collections/kayaks-whitewater'
+
+    r = requests.get(url, headers=headers)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    mainboats = soup.find_all('div', { 'class': 'product-item'})
+    for boat in mainboats:
+        starterUrl = 'https://www.rutabagashop.com/'
+        brand = boat.find('a', {'class': 'product-item__vendor'}).text
+        boatName = boat.find('a', {'class': 'product-item__title'}).text
+        link = boat.find('a', {'class': 'product-item__image-wrapper'})['href']
+        price =  re.sub("\D", "", boat.find('span', {'class': 'price'}).text)
+        finalPrice = price[:-2]
+        # image srcs aren't accessible
+        boatObject = {
+            'title': brand + ' ' + boatName,
+            'link': starterUrl + link,
+            'price': finalPrice
+        }
+        boatlist.append(boatObject)
+    return
+
+
+def getAllKayaks():
+    getBoatsFromColoradoKayak()
+    getBoatsNA()
+    getBoatsFromRutabaga
+    print(boatlist)
+    return 
+
+getAllKayaks()
 
