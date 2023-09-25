@@ -10,7 +10,7 @@ headers = {'User-Agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (K
 def getBoatsNA():
     # gettign boats for next adventure site
     allBoats = getBoatsFromNextAdventure(4)
-    return allBoats
+    return boatlist
    
 
 def getBoatsFromNextAdventure(pages):
@@ -24,6 +24,8 @@ def getBoatsFromNextAdventure(pages):
         for item in boats:
             img = item.find('img', {'class': 'product-image-photo'})
             boat = {
+            'website': 'Next Adventure',
+            'by_ref': 'next-adventure',
             'title': item.find('a', {'class': 'product-item-link'}).text,
             'link': item.find('a', {'class': 'product-item-link'})['href'],
             'price': item.find('div', {'class': 'price-final_price'}).text if item.find('div', {'class': 'price-final_price'}) else '',
@@ -53,13 +55,15 @@ def getBoatsFromColoradoKayak():
                     productUrl = url + actionButton['data-product-url']
 
                 boatObject = {
+                    'website': 'Colorado Kayak',
+                    'by-ref': 'colorado-kayak',
                     'title': boat.find('a', {'class': 'product-item__title'}).text,
                     'link': productUrl,
                     'price': re.sub("\D", "", boat.find('span', {'class': 'price'}).text),
                     'image': 'https::' + imgElement['data-src']
                 }
                 boatlist.append(boatObject)
-    return
+    return boatlist
 
 def getBoatsFromRutabaga():
     url = 'https://www.rutabagashop.com/collections/kayaks-whitewater'
@@ -76,20 +80,21 @@ def getBoatsFromRutabaga():
         finalPrice = price[:-2]
         # image srcs aren't accessible
         boatObject = {
+            'website': 'Rutabaga Shop',
+            'by-ref': 'rutabaga-shop',
             'title': brand + ' ' + boatName,
             'link': starterUrl + link,
             'price': finalPrice
         }
         boatlist.append(boatObject)
-    return
+    return boatlist
 
 
 def getAllKayaks():
     getBoatsFromColoradoKayak()
     getBoatsNA()
-    getBoatsFromRutabaga
-    print(boatlist)
-    return 
-
-getAllKayaks()
+    getBoatsFromRutabaga()
+    # can print directly to console if you remve boatlist from return and bring back print comment
+    # print(boatlist)
+    return boatlist
 
