@@ -58,7 +58,7 @@ pyOpenSSL==21.0.0
 pyparsing==2.4.7
 pyRFC3339==1.1
 python-apt==2.4.0+ubuntu1
-python-debian===0.1.43ubuntu1
+python-debian
 python-gnupg==0.4.8
 python-xlib==0.29
 pytz==2022.1
