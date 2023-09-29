@@ -65,7 +65,7 @@ pytz==2022.1
 pywinrm==0.3.0
 pyxdg==0.27
 PyYAML
-repolib==2.2.1
+repolib
 repoman==1.4.0
 requests==2.25.1
 requests-kerberos==0.12.0
