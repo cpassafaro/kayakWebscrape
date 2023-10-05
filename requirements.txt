@@ -4,11 +4,9 @@ fastapi==0.103.1
 gunicorn==21.2.0
 pycairo==1.20.1
 pycryptodomex==3.11.0
-pycups
 pydantic==2.4.0
 pydantic_core==2.10.0
 pydbus==0.6.0
-PyGObject
 PyJWT==2.3.0
 pykerberos==1.1.14
 pymacaroons==0.13.0
