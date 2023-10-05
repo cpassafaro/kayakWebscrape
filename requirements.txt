@@ -1,6 +1,5 @@
 beautifulsoup4
 bs4
-fastapi
 python3
 uvicorn
-fastapi
+fastapi==0.103.1
