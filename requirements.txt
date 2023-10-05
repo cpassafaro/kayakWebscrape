@@ -1,6 +1,6 @@
-beautifulsoup4==4.12.2
-bs4==0.0.1
-fastapi==0.103.1
+beautifulsoup4
+bs4
+fastapi
 python3
 uvicorn
 fastapi
