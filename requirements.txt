@@ -66,7 +66,6 @@ pywinrm==0.3.0
 pyxdg==0.27
 PyYAML
 repolib
-repoman
 requests==2.25.1
 requests-kerberos==0.12.0
 requests-ntlm==1.1.0
