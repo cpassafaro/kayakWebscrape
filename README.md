@@ -15,3 +15,5 @@ To run locally ensure that both of FastApi and Uvicorn are installed locally. Th
 For Example:
 ```
 /home/christinapassafaro/.local/bin/uvicorn main:app --reload
+
+//web:gunicorn -w 4 -k uvicorn.workers.UvicornWorker main.py
