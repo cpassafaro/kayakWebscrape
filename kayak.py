@@ -95,6 +95,8 @@ def getAllKayaks():
     getBoatsNA()
     getBoatsFromRutabaga()
     # can print directly to console if you remve boatlist from return and bring back print comment
-    # print(boatlist)
+    print(boatlist)
     return boatlist
+
+getAllKayaks()
 
